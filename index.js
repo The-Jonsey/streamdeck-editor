@@ -1,6 +1,8 @@
 const {app, BrowserWindow, ipcMain} = require("electron");
 const dbus = new (require("./dbus.js"))();
 
+process.title = "streamdeck-editor";
+
 let mainWindow;
 
 function createWindow () {
@@ -63,5 +65,11 @@ ipcMain.on("reload", (event) => {
 ipcMain.on("set-page", (event, arg) => {
     dbus.setPage(arg, status => {
         event.reply("page-set", status);
+    })
+});
+
+ipcMain.on("commit-config", (event, arg) => {
+    dbus.commitConfig(status => {
+        event.reply("config-committed", status);
     })
 });

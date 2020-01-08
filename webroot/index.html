@@ -7,13 +7,35 @@
 </head>
 <body>
     <div class="wrapper">
-    <select size="100" id="pages"></select>
+    <div class="pages-wrapper">
+        <button id="add-page">Add Page</button>
+        <button id="clear-page">Clear active page</button>
+        <select size="100" id="pages"></select>
+    </div>
         <div class="table-wrapper">
             <p>Current selected cell is: <span id="selected"></span></p>
             <div id="grid-container"></div>
         </div>
-    <div class="input-wrapper"></div>
+    <div class="input-wrapper">
+        <label for="action-type">Action Type</label>
+        <select id="action-type" disabled>
+            <option value="">Please Select</option>
+            <option value="command">Command</option>
+            <option value="keybind">Keybind</option>
+            <option value="switch_page">Page Switch</option>
+            <option value="url">Open URL</option>
+        </select>
+        <label for="action">Action</label>
+        <input id="action" type="text" class="text-input" disabled>
+        <hr/>
+        <label for="icon-button">Icon</label>
+        <button id="icon-button" disabled>Choose Icon</button>
+        <input id="icon-input" type="file" accept=".jpg,.jpeg,.png" disabled>
+        <hr>
+        <label for="submit">Save</label>
+        <button id="submit" disabled>Save Config to Streamdeck</button>
     </div>
-<script src="js/index.js"></script>
+    </div>
+<script type="module" src="js/index.js"></script>
 </body>
 </html>

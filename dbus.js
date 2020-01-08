@@ -76,4 +76,12 @@ module.exports = class DBus {
             })
         })
     }
+
+    commitConfig(cback) {
+        this.getInterface(iface => {
+            iface.CommitConfig((err, str) => {
+                cback(str);
+            })
+        })
+    }
 };

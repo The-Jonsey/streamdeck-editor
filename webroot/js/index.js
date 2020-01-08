@@ -1,73 +1,56 @@
-const { ipcRenderer } = require('electron');
+import Page from './page.js';
+const { ipcRenderer } = window.require('electron');
+
 let config;
-let deckInfo;
+export let deckInfo;
+
 let pages = [];
+
 const pageList = document.getElementById("pages");
 const tableList = document.getElementById("grid-container");
-ipcRenderer.on("deck-info", (event, arg) => {
-});
+
+let currentPage;
+let selectedCell = null;
+
+const actionTypeInput = document.getElementById("action-type");
+const actionInput = document.getElementById("action");
+const iconInput = document.getElementById("icon-input");
+const iconButton = document.getElementById("icon-button");
+const submitButton = document.getElementById("submit");
+
 ipcRenderer.on("config", (event, arg) => {
     config = JSON.parse(arg);
+    window.config = config;
     ipcRenderer.send("get-deck-info");
     ipcRenderer.on("deck-info", (event, arg) => {
-        for (let i = 1; i <= config.length; i++) {
-            let option = document.createElement("option");
-            option.setAttribute("value", i-1);
-            if (i === 1) {
-                option.setAttribute("selected", "");
-            }
-            option.innerText = "Page " + i;
-            pageList.appendChild(option);
-            deckInfo = JSON.parse(arg);
+        deckInfo = JSON.parse(arg);
+        for (let page = 0; page < config.length; page++) {
             let table = document.createElement("table");
-            pages.push({
-                table,
-                cells: [
-
-                ]
-            });
-            table.setAttribute("class", "table");
-            if (i === 1) {
-                table.classList.add("active-table");
-            }
-            for (let j = 0; j < deckInfo.rows; j++) {
-                let row = document.createElement("tr");
-                for (let k = 0; k < deckInfo.cols; k++) {
-                    let cell = document.createElement("td");
-                    cell.setAttribute("x-cell", k + (j * 5));
-                    if (config[i - 1].length >= k + j * 5) {
-                        let cellConfig = config[i - 1][k + j * 5];
-                        if (cellConfig !== undefined) {
-                            if (cellConfig.hasOwnProperty("icon")) {
-                                cell.style.backgroundImage = "url(\"file://" + cellConfig.icon + "\")";
-                            } else if (cellConfig.hasOwnProperty("text")) {
-                                cell.innerText = cellConfig.text;
-                            }
-                        }
-                    }
-                    cell.onclick = () => {
-                        let selected = document.querySelectorAll(".selected");
-                        if (selected.length > 0) {
-                            selected[0].classList.remove("selected");
-                        }
-                        cell.classList.add("selected");
-                        document.getElementById("selected").innerText = k + (j * 5);
-                    };
-                    pages[i - 1].cells.push(cell);
-                    row.appendChild(cell);
-                }
-                table.appendChild(row);
-            }
+            let pageOption = document.createElement("option");
+            let pageObj = new Page(page, config[page], table);
+            pages.push(pageObj);
+            pageOption.innerText = "Page " + (page + 1);
+            pageOption.value = page;
+            pageList.appendChild(pageOption);
             tableList.appendChild(table);
+            if (page === 0) {
+                pageObj.getTable().classList.add("active");
+                currentPage = pageObj;
+            }
         }
     });
 });
 
 ipcRenderer.send("get-config");
-function setConfig(config) {
-    ipcRenderer.send("set-config", JSON.stringify(config));
 
+function setConfig() {
+    ipcRenderer.send("set-config", JSON.stringify(config));
 }
+
+function commitConfig() {
+    ipcRenderer.send("commit-config");
+}
+
 function reload() {
     ipcRenderer.send("reload");
 }
@@ -78,25 +61,71 @@ pageList.oninput = () => {
 };
 
 function updatePage(pageNumber, emit = true) {
-    clear();
-    pages[pageNumber].table.classList.add("active-table");
+    selectedCell = null;
+    let selected = document.querySelectorAll(".selected");
+    if (selected.length > 0) {
+        selected[0].classList.remove("selected");
+    }
+    document.querySelectorAll(".active")[0].classList.remove("active");
+    document.getElementById("selected").innerText = "";
+    disableInputs();
+    clearInputs();
+    let page = pages[pageNumber];
+    page.getTable().classList.add("active");
+    currentPage = page;
     if (emit) {
         ipcRenderer.send("set-page", pageNumber + "");
     }
 }
 
-
-function clear() {
-    let selected = document.querySelectorAll(".selected");
-    if (selected.length > 0) {
-        selected[0].classList.remove("selected");
-    }
-    document.querySelectorAll(".active-table")[0].classList.remove("active-table");
-    document.getElementById("selected").innerText = "";
-}
-
 ipcRenderer.on("page-updated", (event, arg) => {
     updatePage(arg, false);
-    document.querySelectorAll("option:checked")[0].removeAttribute("selected");
     pageList.value = arg;
 });
+
+export function setSelectedCell(cell) {
+    selectedCell = cell;
+    enableInputs();
+    clearInputs();
+    if (cell.getType() != null) {
+        actionTypeInput.value = cell.getType();
+        actionInput.value = cell.getValue();
+    }
+}
+
+
+function enableInputs() {
+    actionInput.removeAttribute("disabled");
+    actionTypeInput.removeAttribute("disabled");
+    iconInput.removeAttribute("disabled");
+    submitButton.removeAttribute("disabled");
+    iconButton.removeAttribute("disabled");
+}
+
+function disableInputs() {
+    actionInput.setAttribute("disabled", "");
+    actionTypeInput.setAttribute("disabled", "");
+    iconInput.setAttribute("disabled", "");
+    submitButton.setAttribute("disabled", "");
+    iconButton.setAttribute("disabled", "");
+}
+
+function clearInputs() {
+    actionInput.value = "";
+    actionTypeInput.value = "";
+    iconInput.value = "";
+}
+
+submitButton.onclick = () => {
+    if (iconInput.files.length === 1) {
+        selectedCell.setIcon(iconInput.files[0].path);
+    }
+    selectedCell.setType(actionTypeInput.value);
+    selectedCell.setValue(actionInput.value);
+    setConfig();
+    commitConfig();
+};
+
+iconButton.onclick = () => {
+
+}

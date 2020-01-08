@@ -12,11 +12,39 @@ body, html, select {
     height: 95vh;
 }
 
-select {
-    height: 100%;
-    width: 200px;
-    border: 0;
+#pages {
     font-size: 110%;
+    width: 100%;
+    margin: 5px 0;
+    border: 0;
+    height: 95%;
+}
+
+#pages::-webkit-scrollbar {
+    width: 0 !important;
+}
+
+#pages option:nth-child(even) {
+    background: #333;
+}
+
+#pages option:nth-child(odd) {
+    background: #444;
+}
+
+#pages option:checked {
+    box-shadow: 0 0 10px 100px #c33 inset;
+    color: #fff !important;
+}
+
+.pages-wrapper {
+    height: 100%;
+    width: 33%;
+    overflow-y: hidden;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    box-sizing: border-box;
+    padding: 20px;
 }
 
 
@@ -48,16 +76,60 @@ td {
 }
 
 .input-wrapper {
-    width: 200px;
+    width: 33%;
     height: 100%;
     border: 1px solid #fff;
     border-radius: 5px;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .table {
     display: none;
 }
 
-.active-table {
+.active {
     display: unset;
+}
+
+#action-type {
+    width: 45%;
+    border-radius: 5px;
+    height: 25px;
+    border-color: #fff;
+}
+
+label {
+    display: inline-block;
+    width: 25%;
+    padding-right: 25%;
+    margin: 10px 0;
+}
+
+.text-input {
+    width: 45%;
+    background: #333;
+    border: 1px solid #fff;
+    height: 25px;
+    border-radius: 5px;
+    color: #fff;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+input[type="file"] {
+    width: 45%;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+button {
+    background: #444;
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    padding: 5px;
+    height: 30px;
 }
