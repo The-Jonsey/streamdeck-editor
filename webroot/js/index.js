@@ -16,23 +16,20 @@ const actionTypeInput = document.getElementById("action-type");
 const actionInput = document.getElementById("action");
 const iconInput = document.getElementById("icon-input");
 const iconButton = document.getElementById("icon-button");
+const removeIconButton = document.getElementById("remove-icon-button");
 const submitButton = document.getElementById("submit");
+const clearPageButton = document.getElementById("clear-page");
+const addPageButton = document.getElementById("add-page");
 
 ipcRenderer.on("config", (event, arg) => {
     config = JSON.parse(arg);
+    console.log(config);
     window.config = config;
     ipcRenderer.send("get-deck-info");
     ipcRenderer.on("deck-info", (event, arg) => {
         deckInfo = JSON.parse(arg);
         for (let page = 0; page < config.length; page++) {
-            let table = document.createElement("table");
-            let pageOption = document.createElement("option");
-            let pageObj = new Page(page, config[page], table);
-            pages.push(pageObj);
-            pageOption.innerText = "Page " + (page + 1);
-            pageOption.value = page;
-            pageList.appendChild(pageOption);
-            tableList.appendChild(table);
+            let pageObj = setupPage(page);
             if (page === 0) {
                 pageObj.getTable().classList.add("active");
                 currentPage = pageObj;
@@ -67,7 +64,6 @@ function updatePage(pageNumber, emit = true) {
         selected[0].classList.remove("selected");
     }
     document.querySelectorAll(".active")[0].classList.remove("active");
-    document.getElementById("selected").innerText = "";
     disableInputs();
     clearInputs();
     let page = pages[pageNumber];
@@ -100,6 +96,7 @@ function enableInputs() {
     iconInput.removeAttribute("disabled");
     submitButton.removeAttribute("disabled");
     iconButton.removeAttribute("disabled");
+    removeIconButton.removeAttribute("disabled");
 }
 
 function disableInputs() {
@@ -108,6 +105,7 @@ function disableInputs() {
     iconInput.setAttribute("disabled", "");
     submitButton.setAttribute("disabled", "");
     iconButton.setAttribute("disabled", "");
+    removeIconButton.setAttribute("disabled", "");
 }
 
 function clearInputs() {
@@ -127,5 +125,37 @@ submitButton.onclick = () => {
 };
 
 iconButton.onclick = () => {
+    iconInput.click();
+};
 
+removeIconButton.onclick = () => {
+    selectedCell.removeIcon();
+};
+
+function setupPage(page) {
+    let table = document.createElement("table");
+    let pageOption = document.createElement("option");
+    let pageObj = new Page(page, config[page], table);
+    pages.push(pageObj);
+    pageOption.innerText = "Page " + (page + 1);
+    pageOption.value = page;
+    pageList.appendChild(pageOption);
+    tableList.appendChild(table);
+    return pageObj;
 }
+
+addPageButton.onclick = () => {
+    let page = pages.length;
+    let pageObj = setupPage(page);
+    config.push(pageObj.getConfig());
+    setConfig();
+    commitConfig();
+};
+
+clearPageButton.onclick = () => {
+    if (confirm("Are you sure? this isn't reversible")) {
+        currentPage.clear();
+        setConfig();
+        commitConfig();
+    }
+};

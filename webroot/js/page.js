@@ -48,4 +48,8 @@ export default class Page {
     getTable() {
         return this._table;
     }
+
+    clear() {
+        this.getCells().forEach(cell => cell.clear());
+    }
 }

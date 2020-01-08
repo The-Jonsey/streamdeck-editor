@@ -133,3 +133,12 @@ button {
     padding: 5px;
     height: 30px;
 }
+
+button:disabled {
+    background: #333;
+    color: #ccc;
+}
+
+select:disabled {
+    color: #ccc;
+}

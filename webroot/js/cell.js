@@ -42,7 +42,6 @@ export default class Cell {
                 selected[0].classList.remove("selected");
             }
             cell.classList.add("selected");
-            document.getElementById("selected").innerText = this.getIndex();
         }
     }
 
@@ -70,6 +69,12 @@ export default class Cell {
         this.getConfig().icon = icon;
     }
 
+    removeIcon() {
+        this._icon = null;
+        this.getCell().style.backgroundImage = "";
+        this.getConfig().icon = "";
+    }
+
     getType() {
         return this._type;
     }
@@ -91,5 +96,11 @@ export default class Cell {
     setValue(value) {
         this._value = value;
         this.getConfig()[this._type] = value;
+    }
+
+    clear() {
+        this.setType("");
+        this.setValue("");
+        this.removeIcon();
     }
 }

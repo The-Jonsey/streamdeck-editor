@@ -1,5 +1,3 @@
 #!/usr/bin/env node
-
-const exec = require('child_process').exec;
-
-exec("node ./node_modules/.bin/electron .");
+const path = require("path");
+require('child_process').exec("node " + path.join(__dirname, "node_modules/.bin/electron") + " " + __dirname);
