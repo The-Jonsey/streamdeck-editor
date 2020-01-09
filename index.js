@@ -15,6 +15,8 @@ function createWindow () {
         }
     });
 
+    mainWindow.setMenu(null);
+
     mainWindow.loadFile("./webroot/index.html");
 
 }
