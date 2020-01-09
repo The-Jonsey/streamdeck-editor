@@ -27,6 +27,9 @@ export default class Cell {
         } else if (this._config.hasOwnProperty("url")) {
             this._type = "url";
             this._value = this._config.url;
+        } else if (this._config.hasOwnProperty("brightness")) {
+            this._type = "brightness";
+            this._value = this._config.brightness;
         }
     }
 
