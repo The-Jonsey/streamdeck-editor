@@ -30,6 +30,9 @@ export default class Cell {
         } else if (this._config.hasOwnProperty("brightness")) {
             this._type = "brightness";
             this._value = this._config.brightness;
+        } else if (this._config.hasOwnProperty("write")) {
+            this._type = "write";
+            this._value = this._config.write;
         }
     }
 
