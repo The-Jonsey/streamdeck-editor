@@ -39,6 +39,7 @@ The right pane is made up of the inputs to define the look and behaviour of a "b
     - `url`: which will open a url in your default browser via xdg
     - `switch_page`: to switch the active page to the indicated page
     - `brightness`: to set the brightness of the streamdeck as a percentage
+    - `write`: Write out a provided string via xdotool
 - Action - the action to run for that type
 - Choose icon - choose the icon to be the background image for that "button" on that page
 - Remove icon - Remove the icon from the "button"
