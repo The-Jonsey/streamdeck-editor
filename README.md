@@ -33,7 +33,7 @@ it will get a red border, which activates the controls in the right pane, which 
 
 The right pane is made up of the inputs to define the look and behaviour of a "button", the inputs on that pane are:
 
-- Action Type - which is a list of types of action a "button" can perform, which are:
+- Action Type - A list of types of action a "button" can perform, which are:
     - `command`: which is just a native shell command, something like `notify-send "Hello World"`.
     - `keybind`: which will simulate the indicated keybind via xdtotool.
     - `url`: which will open a url in your default browser via xdg.
