@@ -34,9 +34,9 @@ it will get a red border, which activates the controls in the right pane, which 
 The right pane is made up of the inputs to define the look and behaviour of a "button", the inputs on that pane are:
 
 - Action Type - a list of types of action a "button" can perform, which are:
-    - `command`: which is just a native shell command, something like `notify-send "Hello World"`.
-    - `keybind`: which will simulate the indicated keybind via xdtotool.
-    - `url`: which will open a url in your default browser via xdg.
+    - `command`: runs a native shell command, something like `notify-send "Hello World"`.
+    - `keybind`: simulates the indicated keybind via xdtotool.
+    - `url`: opens a url in your default browser via xdg.
     - `switch_page`: to switch the active page to the indicated page.
     - `brightness`: to set the brightness of the streamdeck as a percentage.
     - `write`: write out a provided string via xdotool.
