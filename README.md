@@ -1,5 +1,5 @@
 # Streamdeck Editor
-## An Editor for [Streamdeckd](https://npmjs.com/package/streamdeckd)
+## An Editor for [Streamdeckd](https://github.com/the-jonsey/streamdeckd)
 
 ### Installation
 
