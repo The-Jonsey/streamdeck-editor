@@ -115,9 +115,6 @@ function clearInputs() {
 }
 
 submitButton.onclick = () => {
-    if (iconInput.files.length === 1) {
-        selectedCell.setIcon(iconInput.files[0].path);
-    }
     selectedCell.setType(actionTypeInput.value);
     selectedCell.setValue(actionInput.value);
     setConfig();
@@ -126,6 +123,12 @@ submitButton.onclick = () => {
 
 iconButton.onclick = () => {
     iconInput.click();
+};
+
+iconInput.oninput = () => {
+    if (iconInput.files.length === 1) {
+        selectedCell.setIcon(iconInput.files[0].path);
+    }
 };
 
 removeIconButton.onclick = () => {
