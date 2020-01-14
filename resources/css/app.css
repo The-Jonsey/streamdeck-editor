@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body {
+    @apply h-full
+}
+
+body {
+    @apply bg-gray-700 text-gray-200;
+}
+
+select, input, button {
+    @apply block bg-gray-100 text-gray-600 p-1 m-1 my-2 rounded
+}
+
+button {
+    @apply bg-blue-900 text-white p-2 text-sm
+}
+
+.deck-table {
+
+}
+
+.deck-table td {
+    width: 72px; height: 72px;
+    @apply inline-block m-2 bg-gray-600 rounded shadow shadow-inner;
+}

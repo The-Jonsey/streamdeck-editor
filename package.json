@@ -16,6 +16,14 @@
   "preferGlobal": true,
   "dependencies": {
     "dbus-native": "^0.4.0",
-    "electron": "^7.1.7"
+    "electron": "^7.1.7",
+    "tailwindcss": "^1.1.4"
+  },
+  "devDependencies": {
+    "autoprefixer": "latest",
+    "electron-connect": "^0.6.3",
+    "electron-reload": "^1.5.0",
+    "gulp": "^4.0.2",
+    "gulp-postcss": "^8.0.0"
   }
 }

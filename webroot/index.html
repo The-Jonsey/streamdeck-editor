@@ -3,42 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <title>StreamDeck Editor</title>
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/app.css">
 </head>
-<body>
-    <div class="wrapper">
-    <div class="pages-wrapper">
-        <button id="add-page">Add Page</button>
-        <button id="clear-page">Clear active page</button>
-        <select size="100" id="pages"></select>
-    </div>
-        <div class="table-wrapper">
-            <div id="grid-container"></div>
+<body class="flex w-full h-full justify-between">
+    <div class="flex flex-col w-3/12 bg-gray-800 p-4">
+        <div class="flex flex-col">
+            <button id="add-page">Add Page</button>
+            <button id="clear-page">Clear active page</button>
         </div>
-    <div class="input-wrapper">
-        <label for="action-type">Action Type</label>
-        <select id="action-type" disabled>
-            <option value="">Please Select</option>
-            <option value="command">Command</option>
-            <option value="keybind">Keybind</option>
-            <option value="switch_page">Page Switch</option>
-            <option value="url">Open URL</option>
-            <option value="brightness">Set Streamdeck Brightness</option>
-            <option value="write">Type out a string</option>
-        </select>
-        <label for="action">Action</label>
-        <input id="action" type="text" class="text-input" disabled>
-        <hr/>
-        <label for="icon-button">Icon</label>
-        <button id="icon-button" disabled>Choose Icon</button>
-        <input id="icon-input" type="file" accept=".jpg,.jpeg,.png" disabled>
-        <label for="remove-icon-button">Remove icon</label>
-        <button id="remove-icon-button" disabled>Remove Icon</button>
-        <hr>
-        <label for="submit">Save</label>
-        <button id="submit" disabled>Save Config to Streamdeck</button>
+        <div>
+            <label for="pages" class="hidden" aria-hidden="true">Pages</label>
+            <!--<select size="100" id="pages">
+                <option value="0">Page 1</option>
+                <option value="1">Page 2</option>
+                <option value="2">Page 3</option>
+                <option value="3">Page 4</option>
+                <option value="4">Page 5</option>
+                <option value="5">Page 6</option>
+            </select>-->
+        </div>
     </div>
+    <div class="flex flex-col w-6/12 items-center justify-center shadow-inner">
+        <table class="deck-table">
+            <tr>
+                <td>
+                </td>
+                <td>
+                </td><td>
+            </td><td>
+            </td><td>
+            </td>
+            </tr>
+            <tr>
+                <td>
+                </td><td>
+            </td><td>
+            </td><td>
+            </td><td>
+            </td>
+            </tr>
+            <tr>
+                <td>
+                </td><td>
+            </td><td>
+            </td><td>
+            </td><td>
+            </td>
+            </tr>
+        </table>
     </div>
-<script type="module" src="js/index.js"></script>
+
+    <div class="flex flex-col w-3/12 bg-gray-800 p-4">
+        <div class="flex flex-col flex-grow">
+            <label for="action-type" class="hidden" aria-hidden="true">Action Type</label>
+            <select id="action-type" disabled>
+                <option value="">Select an acton</option>
+                <option value="command">Command</option>
+                <option value="keybind">Keybind</option>
+                <option value="switch_page">Page Switch</option>
+                <option value="url">Open URL</option>
+                <option value="brightness">Set Stream Deck Brightness</option>
+                <option value="write">Type out a string</option>
+            </select>
+
+            <label for="action" class="hidden" aria-hidden="true">Action</label>
+            <input id="action" type="text" placeholder="Action" disabled>
+
+            <div class="flex justify-between">
+                <button id="icon-button" disabled>Choose Icon</button>
+                <button id="remove-icon-button" disabled>Remove Icon</button>
+            </div>
+            <input id="icon-input" class="hidden" type="file" accept=".jpg,.jpeg,.png" disabled>
+        </div>
+
+        <div class="flex flex-col">
+            <label for="submit" class="hidden" aria-hidden="true">Save</label>
+            <button id="submit" class="block" disabled>Save Config</button>
+            </div>
+        </div>
+    <script type="module" src="js/index.js">
+
+    </script>
 </body>
 </html>
