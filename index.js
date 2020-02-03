@@ -2,7 +2,7 @@
 require('electron-reload')(__dirname);
 
 const {app, BrowserWindow, ipcMain} = require("electron");
-// const dbus = new (require("./dbus.js"))();
+const dbus = new (require("./dbus.js"))();
 
 process.title = "streamdeck-editor";
 
@@ -43,41 +43,41 @@ app.on('activate', function () {
 });
 
 
-// ipcMain.on("get-deck-info", (event) => {
-//     dbus.getDeckInfo((info) => {
-//         event.reply("deck-info", info);
-//     });
-//     dbus.listenToPage(page => {
-//         event.reply("page-updated", page);
-//     });
-// });
-//
-// ipcMain.on('get-config', (event) => {
-//     dbus.getConfig((config) => {
-//         event.reply("config", config);
-//     })
-// });
-//
-// ipcMain.on('set-config', (event, arg) => {
-//     dbus.setConfig(arg, (status) => {
-//         event.reply("status", status);
-//     })
-// });
-//
-// ipcMain.on("reload", (event) => {
-//     dbus.reload((status) => {
-//         event.reply("reload", status);
-//     })
-// });
-//
-// ipcMain.on("set-page", (event, arg) => {
-//     dbus.setPage(arg, status => {
-//         event.reply("page-set", status);
-//     })
-// });
-//
-// ipcMain.on("commit-config", (event, arg) => {
-//     dbus.commitConfig(status => {
-//         event.reply("config-committed", status);
-//     })
-// });
+ipcMain.on("get-deck-info", (event) => {
+    dbus.getDeckInfo((info) => {
+        event.reply("deck-info", info);
+    });
+    dbus.listenToPage(page => {
+        event.reply("page-updated", page);
+    });
+});
+
+ipcMain.on('get-config', (event) => {
+    dbus.getConfig((config) => {
+        event.reply("config", config);
+    })
+});
+
+ipcMain.on('set-config', (event, arg) => {
+    dbus.setConfig(arg, (status) => {
+        event.reply("status", status);
+    })
+});
+
+ipcMain.on("reload", (event) => {
+    dbus.reload((status) => {
+        event.reply("reload", status);
+    })
+});
+
+ipcMain.on("set-page", (event, arg) => {
+    dbus.setPage(arg, status => {
+        event.reply("page-set", status);
+    })
+});
+
+ipcMain.on("commit-config", (event, arg) => {
+    dbus.commitConfig(status => {
+        event.reply("config-committed", status);
+    })
+});

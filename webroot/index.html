@@ -3,57 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>StreamDeck Editor</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'">
     <link rel="stylesheet" href="css/app.css">
 </head>
 <body class="flex w-full h-full justify-between">
-    <div class="flex flex-col w-3/12 bg-gray-800 p-4">
+    <div class="flex flex-col w-3/12 bg-gray-800 p-4 bg-dark shadow-2xl">
         <div class="flex flex-col">
             <button id="add-page">Add Page</button>
             <button id="clear-page">Clear active page</button>
         </div>
         <div>
             <label for="pages" class="hidden" aria-hidden="true">Pages</label>
-            <!--<select size="100" id="pages">
-                <option value="0">Page 1</option>
-                <option value="1">Page 2</option>
-                <option value="2">Page 3</option>
-                <option value="3">Page 4</option>
-                <option value="4">Page 5</option>
-                <option value="5">Page 6</option>
-            </select>-->
+            <select size="100" id="pages">
+            </select>
         </div>
     </div>
-    <div class="flex flex-col w-6/12 items-center justify-center shadow-inner">
-        <table class="deck-table">
-            <tr>
-                <td>
-                </td>
-                <td>
-                </td><td>
-            </td><td>
-            </td><td>
-            </td>
-            </tr>
-            <tr>
-                <td>
-                </td><td>
-            </td><td>
-            </td><td>
-            </td><td>
-            </td>
-            </tr>
-            <tr>
-                <td>
-                </td><td>
-            </td><td>
-            </td><td>
-            </td><td>
-            </td>
-            </tr>
-        </table>
+    <div class="flex flex-col w-6/12 items-center justify-center shadow-inner" id="grid-container">
     </div>
 
-    <div class="flex flex-col w-3/12 bg-gray-800 p-4">
+    <div class="flex flex-col w-3/12 bg-gray-800 p-4 bg-dark shadow-2xl">
         <div class="flex flex-col flex-grow">
             <label for="action-type" class="hidden" aria-hidden="true">Action Type</label>
             <select id="action-type" disabled>
@@ -68,6 +36,10 @@
 
             <label for="action" class="hidden" aria-hidden="true">Action</label>
             <input id="action" type="text" placeholder="Action" disabled>
+
+            <label for="text" class="hidden" aria-hidden="true">Text</label>
+            <input id="text" type="text" placeholder="Text" disabled>
+            <button id="set-text" disabled>Set Text</button>
 
             <div class="flex justify-between">
                 <button id="icon-button" disabled>Choose Icon</button>
