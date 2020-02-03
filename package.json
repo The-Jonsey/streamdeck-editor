@@ -1,7 +1,7 @@
 {
   "name": "streamdeck-editor",
   "version": "1.0.0",
-  "description": "",
+  "description": "An editor built on electron for https://github.com/the-jonsey/streamdeckd",
   "main": "index.js",
   "scripts": {
     "start": "node_modules/.bin/electron .",
