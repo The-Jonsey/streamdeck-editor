@@ -1,3 +1,6 @@
+// Auto reloading
+require('electron-reload')(__dirname);
+
 const {app, BrowserWindow, ipcMain} = require("electron");
 const dbus = new (require("./dbus.js"))();
 
@@ -10,12 +13,15 @@ function createWindow () {
     mainWindow = new BrowserWindow({
         width: 1280,
         height: 720,
+        frame: true,
+        transparent: true,
+       // titleBarStyle: 'hidden',
         webPreferences: {
             nodeIntegration: true
         }
     });
 
-    mainWindow.setMenu(null);
+  //  mainWindow.setMenu(null);
 
     mainWindow.loadFile("./webroot/index.html");
 

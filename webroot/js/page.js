@@ -16,7 +16,7 @@ export default class Page {
 
     createTable() {
         let table = this.getTable();
-        table.setAttribute("class", "table");
+        table.setAttribute("class", "deck-table");
         for (let row = 0; row < deckInfo.rows; row++) {
             let rowElem = document.createElement("tr");
             for (let col = 0; col < deckInfo.cols; col++) {

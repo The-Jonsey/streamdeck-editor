@@ -43,4 +43,5 @@ The right pane is made up of the inputs to define the look and behaviour of a "b
 - Action - the action to run for that type.
 - Choose icon - choose the icon to be the background image for that "button" on that page.
 - Remove icon - remove the icon from the "button".
+- Text - Set the text to be superimposed over the image, if no image is specified, it will just display the text
 - Save - saves the button's config to the streamdeck.

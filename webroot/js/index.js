@@ -20,17 +20,18 @@ const removeIconButton = document.getElementById("remove-icon-button");
 const submitButton = document.getElementById("submit");
 const clearPageButton = document.getElementById("clear-page");
 const addPageButton = document.getElementById("add-page");
+const textInput = document.getElementById("text");
+const setTextButton = document.getElementById("set-text");
 
 ipcRenderer.on("config", (event, arg) => {
     config = JSON.parse(arg);
-    console.log(config);
     window.config = config;
     ipcRenderer.send("get-deck-info");
     ipcRenderer.on("deck-info", (event, arg) => {
         deckInfo = JSON.parse(arg);
         for (let page = 0; page < config.length; page++) {
             let pageObj = setupPage(page);
-            if (page === 0) {
+            if (page === deckInfo.page) {
                 pageObj.getTable().classList.add("active");
                 currentPage = pageObj;
             }
@@ -63,7 +64,9 @@ function updatePage(pageNumber, emit = true) {
     if (selected.length > 0) {
         selected[0].classList.remove("selected");
     }
-    document.querySelectorAll(".active")[0].classList.remove("active");
+    let active = document.querySelectorAll(".active");
+    if (active.length > 0)
+        active[0].classList.remove("active");
     disableInputs();
     clearInputs();
     let page = pages[pageNumber];
@@ -86,6 +89,7 @@ export function setSelectedCell(cell) {
     if (cell.getType() != null) {
         actionTypeInput.value = cell.getType();
         actionInput.value = cell.getValue();
+        textInput.value = cell.getText();
     }
 }
 
@@ -97,6 +101,8 @@ function enableInputs() {
     submitButton.removeAttribute("disabled");
     iconButton.removeAttribute("disabled");
     removeIconButton.removeAttribute("disabled");
+    textInput.removeAttribute("disabled");
+    setTextButton.removeAttribute("disabled");
 }
 
 function disableInputs() {
@@ -106,12 +112,15 @@ function disableInputs() {
     submitButton.setAttribute("disabled", "");
     iconButton.setAttribute("disabled", "");
     removeIconButton.setAttribute("disabled", "");
+    textInput.setAttribute("disabled", "");
+    setTextButton.setAttribute("disabled", "");
 }
 
 function clearInputs() {
     actionInput.value = "";
     actionTypeInput.value = "";
     iconInput.value = "";
+    textInput.value = "";
 }
 
 submitButton.onclick = () => {
@@ -134,6 +143,10 @@ iconInput.oninput = () => {
 removeIconButton.onclick = () => {
     selectedCell.removeIcon();
 };
+
+setTextButton.onclick = () => {
+    selectedCell.setText(textInput.value);
+}
 
 function setupPage(page) {
     let table = document.createElement("table");
