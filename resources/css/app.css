@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 html, body {
     @apply h-full
 }
@@ -10,12 +11,21 @@ body {
     @apply bg-darker text-gray-200;
 }
 
-select, input, button {
+.select, .inp, .btn {
     @apply block bg-gray-100 text-gray-600 p-1 m-1 my-2 rounded
 }
 
-input {
+.inp {
     @apply px-2;
+}
+
+.btn {
+    @apply bg-accent text-white p-2 text-sm
+}
+
+svg {
+    stroke-width: 0.5;
+    @apply font-bold font-sans w-full stroke-black fill-white
 }
 
 #pages {
@@ -23,12 +33,9 @@ input {
     @apply h-64
 }
 
+
 #pages::-webkit-scrollbar {
     @apply hidden;
-}
-
-button {
-    @apply bg-accent text-white p-2 text-sm
 }
 
 .deck-table {
@@ -52,9 +59,4 @@ button {
 
 .selected {
     @apply border-accent border border-collapse
-}
-
-svg {
-    stroke-width: 0.5;
-    @apply font-bold font-sans w-full stroke-black fill-white
 }

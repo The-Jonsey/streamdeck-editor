@@ -1,18 +1,27 @@
 {
   "name": "streamdeck-editor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An editor built on electron for https://github.com/the-jonsey/streamdeckd",
   "main": "index.js",
   "scripts": {
     "start": "node_modules/.bin/electron .",
+    "build:css": "postcss --config postcss.config.js -o webroot/css/app.css resources/css/index.css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
     "streamdeck-editor": "./cli.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["Elgato", "StreamDeck", "Stream", "Deck"],
+  "author": "The-Jonsey",
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/the-jonsey/streamdeck-editor.git"
+  },
+  "bugs": {
+    "url": "https://github.com/the-jonsey/streamdeck-editor/issues"
+  },
+  "homepage": "https://github.com/the-jonsey/streamdeck-editor#readme",
   "preferGlobal": true,
   "dependencies": {
     "dbus-native": "^0.4.0",
@@ -20,10 +29,13 @@
     "tailwindcss": "^1.1.4"
   },
   "devDependencies": {
-    "autoprefixer": "latest",
+    "@fullhuman/postcss-purgecss": "^2.0.5",
+    "autoprefixer": "^9.7.4",
+    "cssnano": "^4.1.10",
     "electron-connect": "^0.6.3",
     "electron-reload": "^1.5.0",
-    "gulp": "^4.0.2",
-    "gulp-postcss": "^8.0.0"
+    "minifier": "^0.8.1",
+    "postcss-cli": "^7.1.0",
+    "postcss-import": "^12.0.1"
   }
 }
