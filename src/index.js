@@ -10,10 +10,6 @@ ipcRenderer.on("config", (event, args) => {
     ipcRenderer.on("deck-info", (event, arg) => {
         let deckInfo = JSON.parse(arg);
         ReactDOM.render(<App config={config} deckInfo={deckInfo}/>, document.getElementById('root'));
-        ipcRenderer.on("page-updated", (args, page) => {
-            deckInfo.page = page;
-            ReactDOM.render(<App config={config} deckInfo={deckInfo}/>, document.getElementById('root'));
-        });
     });
     ipcRenderer.send("get-deck-info");
 });
