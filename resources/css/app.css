@@ -23,6 +23,10 @@ body {
     @apply bg-accent text-white p-2 text-sm
 }
 
+.btn:disabled {
+    @apply cursor-not-allowed
+}
+
 svg {
     stroke-width: 0.5;
     @apply font-bold font-sans w-full stroke-black fill-white
@@ -39,11 +43,7 @@ svg {
 }
 
 .deck-table {
-    @apply hidden;
-}
-
-.deck-table.active {
-    @apply table;
+    @apply table flex flex-col w-6/12 items-center justify-center shadow-inner
 }
 
 .deck-table td {

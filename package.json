@@ -1,41 +1,53 @@
 {
-  "name": "streamdeck-editor",
-  "version": "1.0.1",
-  "description": "An editor built on electron for https://github.com/the-jonsey/streamdeckd",
-  "main": "index.js",
-  "scripts": {
-    "start": "node_modules/.bin/electron .",
-    "build:css": "postcss --config postcss.config.js -o webroot/css/app.css resources/css/index.css",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "bin": {
-    "streamdeck-editor": "./cli.js"
-  },
-  "keywords": ["Elgato", "StreamDeck", "Stream", "Deck"],
-  "author": "The-Jonsey",
-  "license": "GPL-3.0",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/the-jonsey/streamdeck-editor.git"
-  },
-  "bugs": {
-    "url": "https://github.com/the-jonsey/streamdeck-editor/issues"
-  },
-  "homepage": "https://github.com/the-jonsey/streamdeck-editor#readme",
-  "preferGlobal": true,
+  "name": "streamdeck-editor-react",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
     "dbus-native": "^0.4.0",
-    "electron": "^7.1.7",
-    "tailwindcss": "^1.1.4"
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-scripts": "3.4.0"
+  },
+  "scripts": {
+    "start": "concurrently -k \"npm run watch:js\" \"npm run watch:css\" \"electron .\"",
+    "build:js": "react-scripts build",
+    "build:css": "postcss --config postcss.config.js -o src/css/app.css resources/css/index.css",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "watch:css": "postcss --config postcss.config.js -o src/css/app.css resources/css/index.css -w",
+    "watch:js": "nodemon --watch src -e js,css --exec npm run build:js"
+  },
+  "homepage": "./",
+  "main": "public/main.js",
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
   "devDependencies": {
-    "@fullhuman/postcss-purgecss": "^2.0.5",
+    "@fullhuman/postcss-purgecss": "^2.1.0",
     "autoprefixer": "^9.7.4",
+    "concurrently": "^5.1.0",
     "cssnano": "^4.1.10",
-    "electron-connect": "^0.6.3",
+    "electron": "^8.0.2",
     "electron-reload": "^1.5.0",
     "minifier": "^0.8.1",
+    "nodemon": "^2.0.2",
     "postcss-cli": "^7.1.0",
-    "postcss-import": "^12.0.1"
+    "postcss-import": "^12.0.1",
+    "tailwindcss": "^1.2.0"
   }
 }

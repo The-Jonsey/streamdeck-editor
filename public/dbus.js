@@ -10,13 +10,6 @@ module.exports = class DBus {
     getInterface(cback) {
         this.service.getInterface("/com/thejonsey/streamdeck", "com.thejonsey.streamdeck", (err, iface) => {
             if (err) {
-                console.error(
-                    `Failed to request interface '${interfaceName}' at '${objectPath}' : ${
-                        err
-                    }`
-                        ? err
-                        : '(no error)'
-                );
                 process.exit(1);
             }
             cback(iface)
