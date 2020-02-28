@@ -1,19 +1,17 @@
 {
   "name": "streamdeck-editor-react",
   "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "dbus-native": "^0.4.0",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-scripts": "3.4.0"
+  "description": "An editor built on electron for streamdeckd",
+  "author": {
+    "name": "Louis Jones",
+    "email": "mail@thejonsey.com",
+    "url": "https://thejonsey.com"
   },
+  "private": true,
   "scripts": {
     "start": "concurrently -k \"npm run watch:js\" \"npm run watch:css\" \"npm run electron\"",
-    "electron": "electron .",
+    "electron": "DEBUG=true electron .",
+    "build": "electron-builder --linux",
     "build:js": "react-scripts build",
     "build:css": "postcss --config postcss.config.js -o src/css/app.css resources/css/index.css",
     "test": "react-scripts test",
@@ -21,8 +19,22 @@
     "watch:css": "postcss --config postcss.config.js -o src/css/app.css resources/css/index.css -w",
     "watch:js": "nodemon --watch src -e js,css --exec npm run build:js"
   },
-  "homepage": "./",
-  "main": "public/main.js",
+  "homepage": ".",
+  "build": {
+    "appId": "com.thejonsey.streamdeck-editor",
+    "productName": "StreamDeck Editor",
+    "copyright": "Copyright © 2020 The-Jonsey",
+    "files": [
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "linux": {
+      "target": "AppImage",
+      "icon": "public/logo-400x400.png",
+      "category": "Utility"
+    }
+  },
+  "main": "public/electron.js",
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -38,12 +50,19 @@
       "last 1 safari version"
     ]
   },
+  "dependencies": {
+    "dbus-native": "^0.4.0"
+  },
   "devDependencies": {
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-scripts": "3.4.0",
     "@fullhuman/postcss-purgecss": "^2.1.0",
     "autoprefixer": "^9.7.4",
     "concurrently": "^5.1.0",
     "cssnano": "^4.1.10",
     "electron": "^8.0.2",
+    "electron-builder": "^22.3.2",
     "electron-reload": "^1.5.0",
     "minifier": "^0.8.1",
     "nodemon": "^2.0.2",
