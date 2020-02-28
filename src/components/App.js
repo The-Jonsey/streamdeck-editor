@@ -16,10 +16,11 @@ class App extends Component {
         this.selectUpdate = this.selectUpdate.bind(this);
         this.cellUpdate = this.cellUpdate.bind(this);
         this.handlePageChange = this.handlePageChange.bind(this);
+        this.cellDataUpdate = this.cellDataUpdate.bind(this);
+        this.previewChanges = this.previewChanges.bind(this);
     }
 
     selectUpdate(e) {
-        console.log(e);
         this.setState({page: e.target.value});
         this.setState({cell: null});
         ipcRenderer.send("set-page", parseInt(e.target.value));
@@ -40,6 +41,16 @@ class App extends Component {
         })
     }
 
+    cellDataUpdate(cell) {
+        let config = this.state.config;
+        config.pages[this.state.page][parseInt(this.state.cell)] = cell;
+        this.setState({config});
+    }
+
+    previewChanges() {
+        ipcRenderer.send("set-config", JSON.stringify(this.state.config));
+    }
+
     render() {
         return (
             <div className="flex w-full h-full justify-between">
@@ -55,7 +66,7 @@ class App extends Component {
                 <div className="flex flex-col w-3/12 bg-gray-800 p-4 bg-dark shadow-2xl">
                     <Inputs key={this.state.page + "-" + this.state.cell}
                         cell={this.props.config.pages[parseInt(this.state.page)][parseInt(this.state.cell)]}
-                        handlers={this.props.config.handlers}/>
+                        handlers={this.props.config.handlers} listener={this.cellDataUpdate} preview={this.previewChanges}/>
                 </div>
             </div>
         );

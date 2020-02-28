@@ -34,7 +34,7 @@ class Table extends Component {
         for (let i = 0; i < this.props.deckInfo.rows; i++) {
             let cols = [];
             for (let j = 0; j < this.props.deckInfo.cols; j++) {
-                let cell = this.props.page[(i * 5) + j];
+                let cell = this.props.page[(i * this.props.deckInfo.cols) + j];
                 let style = {
 
                 };
@@ -53,7 +53,7 @@ class Table extends Component {
         style={{fontSize: this.calculateFontSize(cell.text) + "%"}}>{cell.text}</text>
         </svg>;
                 }
-                cols.push(<td data-id={(i * 5) + j} style={style}>{innerHTML}</td>);
+                cols.push(<td data-id={(i * this.props.deckInfo.cols) + j} style={style}>{innerHTML}</td>);
             }
             rows.push(<tr>{cols}</tr>);
         }

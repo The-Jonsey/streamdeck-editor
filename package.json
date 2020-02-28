@@ -12,7 +12,8 @@
     "react-scripts": "3.4.0"
   },
   "scripts": {
-    "start": "concurrently -k \"npm run watch:js\" \"npm run watch:css\" \"electron .\"",
+    "start": "concurrently -k \"npm run watch:js\" \"npm run watch:css\" \"npm run electron\"",
+    "electron": "electron .",
     "build:js": "react-scripts build",
     "build:css": "postcss --config postcss.config.js -o src/css/app.css resources/css/index.css",
     "test": "react-scripts test",
