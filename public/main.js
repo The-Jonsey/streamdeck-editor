@@ -13,6 +13,7 @@ function createWindow () {
         frame: true,
         transparent: true,
         titleBarStyle: 'hidden',
+        icon: path.join(__dirname, 'logo.png'),
         webPreferences: {
             nodeIntegration: true
         }

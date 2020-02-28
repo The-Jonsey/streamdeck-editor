@@ -75,8 +75,8 @@ class Inputs extends Component {
                            placeholder="Set Keybind" value={this.state.keybind}/>
                     <input onChange={this.handleInputChange} data-type={"url"} className="inp" type="text"
                            placeholder="Set URL" value={this.state.url}/>
-                    <input onChange={this.handleInputChange} data-type={"brightness"} className="inp" type="text"
-                           placeholder="Set Brightness" value={this.state.brightness}/>
+                    <input onChange={this.handleInputChange} data-type={"brightness"} className="inp" type="number"
+                           min={0} max={100} step={1} placeholder="Set Brightness" value={this.state.brightness}/>
                     <input onChange={this.handleInputChange} data-type={"write"} className="inp" type="text"
                            placeholder="Set Text to write" value={this.state.write}/>
                     <label>Key Handler</label>
@@ -84,9 +84,6 @@ class Inputs extends Component {
                         onChange={this.handleSelectChange}>{keyHandlers}</select>
                     <HandlerInputs handler={this.props.handlers[this.state.key_handler]} cell={this.props.cell}
                                    type={"key"} listener={this.handleInputChange} fileChange={this.handleFileChange}/>
-                </div>
-                <div className={"flex flex-col"}>
-                    <button className={"btn"} onClick={this.props.preview}>Preview Changes</button>
                 </div>
             </div>
         )
