@@ -24,3 +24,5 @@ yarn-error.log*
 resources
 .idea
 dist
+
+src/css
