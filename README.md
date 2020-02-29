@@ -1,6 +1,8 @@
 # Streamdeck Editor
 ## An Editor for [Streamdeckd](https://github.com/the-jonsey/streamdeckd)
 
+![Editor](docs/editor.png)
+
 ### Installation
 
 You need streamdeckd installed to use this, install by running:
@@ -13,9 +15,6 @@ Then to install Streamdeck Editor, download the AppImage from releases, then run
 
 Make sure the daemon is running, by running `streamdeckd`, then run the editor by running the AppImage.
 
-Below is an image of the editor:
-
-![Editor](docs/editor.png)
 
 #### Left Pane
 
