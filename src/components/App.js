@@ -27,7 +27,8 @@ class App extends Component {
     selectUpdate(e) {
         this.setState({page: e.target.value});
         this.setState({cell: null});
-        ipcRenderer.send("set-page", parseInt(e.target.value));
+        if (parseInt(e.target.value) < this.props.config.pages.length)
+            ipcRenderer.send("set-page", parseInt(e.target.value));
     }
 
     cellUpdate(index) {
@@ -69,8 +70,8 @@ class App extends Component {
         for (let i = 0; i < this.props.deckInfo.cols * this.props.deckInfo.rows; i++) {
             newPage.push({});
         }
-        config.pages.push(newPage);
-        this.setState(config);
+        let newConfig = {handlers: config.handlers, pages: [...config.pages, newPage]};
+        this.setState({config: newConfig});
     }
 
     clearPage() {
@@ -78,10 +79,11 @@ class App extends Component {
         for (let i = 0; i < config.pages[this.state.page].length; i++) {
             config.pages[this.state.page][i] = {};
         }
-        this.setState(config);
+        this.setState({config: config});
     }
 
     render() {
+        console.log(this.state.config.pages.length);
         return (
             <div className="flex w-full h-full justify-between">
                 <div className="flex flex-col w-3/12 bg-gray-800 p-4 bg-dark shadow-2xl">
@@ -89,19 +91,19 @@ class App extends Component {
                         <button className="btn" id="add-page" onClick={this.addPage}>Add Page</button>
                         <button className="btn" id="clear-page" onClick={this.clearPage}>Clear active page</button>
                     </div>
-                    <Select listener={this.selectUpdate} config={this.props.config}/>
+                    <Select listener={this.selectUpdate} config={this.state.config}/>
                     <div className={"flex flex-col"}>
                         <button className={"btn"} onClick={this.previewChanges}>Preview Changes</button>
                         <button className={"btn"} onClick={this.saveChanges}>Save Changes</button>
                         <button className={"btn"} onClick={this.reloadChanges}>Reset changes on Deck</button>
                     </div>
                 </div>
-                <Table key={this.state.page} listener={this.cellUpdate} page={this.props.config.pages[this.state.page]}
+                <Table key={this.state.page} listener={this.cellUpdate} page={this.state.config.pages[this.state.page]}
                        deckInfo={this.props.deckInfo}/>
                 <div className="flex flex-col w-3/12 bg-gray-800 p-4 bg-dark shadow-2xl">
                     <Inputs key={this.state.page + "-" + this.state.cell}
-                        cell={this.props.config.pages[parseInt(this.state.page)][parseInt(this.state.cell)]}
-                        handlers={this.props.config.handlers} listener={this.cellDataUpdate}/>
+                        cell={this.state.config.pages[parseInt(this.state.page)][parseInt(this.state.cell)]}
+                        handlers={this.state.config.handlers} listener={this.cellDataUpdate}/>
                 </div>
             </div>
         );

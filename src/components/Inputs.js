@@ -67,7 +67,7 @@ class Inputs extends Component {
                     <HandlerInputs handler={this.props.handlers[this.state.icon_handler]} cell={this.props.cell}
                                    type={"icon"} listener={this.handleInputChange} fileChange={this.handleFileChange}/>
 
-                    <input onChange={this.handleInputChange} data-type={"switch_page"} className="inp" type="text"
+                    <input onChange={this.handleInputChange} data-type={"switch_page"} className="inp" type="number"
                            placeholder="Set Page" value={this.state.switch_page}/>
                     <input onChange={this.handleInputChange} data-type={"command"} className="inp" type="text"
                            placeholder="Set Command" value={this.state.command}/>
