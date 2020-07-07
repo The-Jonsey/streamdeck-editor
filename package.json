@@ -61,7 +61,7 @@
     "autoprefixer": "^9.7.4",
     "concurrently": "^5.1.0",
     "cssnano": "^4.1.10",
-    "electron": "^8.0.2",
+    "electron": "^8.2.4",
     "electron-builder": "^22.3.2",
     "electron-reload": "^1.5.0",
     "minifier": "^0.8.1",
